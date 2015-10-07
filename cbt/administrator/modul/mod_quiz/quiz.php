@@ -552,6 +552,7 @@ case "daftarsiswayangtelahmengerjakan":
             echo "<tr><td>$no</td>                      
                       <td><a href=?module=siswa&act=detailsiswa&id=$s[id_siswa] title='Detail siswa'>$s[nama_lengkap]</a></td>
                       <td>$k[nama]</td>";
+                      /*
                       if ($t[dikoreksi]=='B'){
                           echo "<td>Jawaban soal essay <b>belum di koreksi</b>
                                     <br>Nilai Tugas/Quiz Pilihan Ganda : $n2[persentase]</td>";
@@ -565,6 +566,7 @@ case "daftarsiswayangtelahmengerjakan":
                           <td><a href=$aksi?module=quiz&act=editsiswayangtelahmengerjakan&id=$t[id]&id_siswa=$s[id_siswa]&id_tq=$_GET[id]&id_rvjaw=$n2[id_rvjaw]>Hapus Siswa</a> |
                           <a href=?module=quiz&act=editkoreksi&id=$t[id_tq]&id_siswa=$s[id_siswa]>Edit Koreksi</a></td></tr>";
                       }
+                      */
                        echo "<td>Nilai : $n2[persentase]</td>";
                        echo "
                           <td><a href=$aksi?module=quiz&act=editsiswayangtelahmengerjakan&id=$t[id]&id_siswa=$s[id_siswa]&id_tq=$_GET[id]&id_rvjaw=$n2[id_rvjaw]>Hapus Siswa</a>
@@ -581,7 +583,7 @@ case "daftarsiswayangtelahmengerjakan":
                     window.location=(href='media_admin.php?module=quiz')</script>";
         }
     }
-    elseif ($_SESSION[leveluser]=='pengajar'){
+    /*elseif ($_SESSION[leveluser]=='pengajar'){
         $siswa_yangmengerjakan = mysql_query("SELECT id_siswa FROM siswa_sudah_mengerjakan WHERE id_tq = '$_GET[id]'");
         $cek_siswa = mysql_num_rows($siswa_yangmengerjakan);
 
@@ -727,6 +729,7 @@ case "daftarsiswayangtelahmengerjakan":
                     window.location=(href='media_admin.php?module=quiz')</script>";
         }
     }
+    */
     break;
 
 case "koreksi":
