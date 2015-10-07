@@ -1,0 +1,2 @@
+[10-Jul-2015 15:56:21 Asia/Jakarta] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/startech/public_html/cbt/configurasi/koneksi.php on line 7
+[15-Aug-2015 13:32:50 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '}' in /home/startech/public_html/cbt/administrator/index.php on line 194

@@ -1,0 +1,21 @@
+SELECT * FROM rvjawaban LEFT JOIN quiz_pilganda on rvjawaban.id_quiz=quiz_pilganda.id_quiz where rvjawaban.id_rvjaw='Qsh1'
+
+
+sdh sy coba, ada beberapa catatan / pertanyaan:
+
+- bgmn menyiapkan beberapa set soal V
+- bgmn cara mencoba bahwa soal keluar secara acak V
+- tolong tambahkan pilihan latihan utk 10 knowledge area yang berbeda V
+- tolong tambahkan pilihan latihan utk 5 process group yang berbeda V
+
+- tolong tambahkan opsi menampilkan semua jawaban yg benar di akhir soal V
+- tambahkan opsi sound utk setiap pilihan jawaban 
+
+kita msh hrs ketemu utk user interface juga
+
+tks
+
+- hilangkan tanggal lahir, jenis kelamin, tempat) pada halaman registrasi siwa
+- hilangkan menu yang ga perlu dan munculkan menu yang umum di gunakan dalam mengedit soal, kolom nilai, dkk
+- koreksi di manajemen ujian menu aksi dipermudah
+-
