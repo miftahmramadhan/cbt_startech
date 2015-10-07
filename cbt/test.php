@@ -26,4 +26,7 @@ include "configurasi/koneksi.php";
 	echo "$rvjaw <br> $crv2 <br>";
 	
 	//echo "$rvjaw <br> $crv2";
+	
+	
+	echo "git";
 ?>

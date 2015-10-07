@@ -565,6 +565,11 @@ case "daftarsiswayangtelahmengerjakan":
                           <td><a href=$aksi?module=quiz&act=editsiswayangtelahmengerjakan&id=$t[id]&id_siswa=$s[id_siswa]&id_tq=$_GET[id]&id_rvjaw=$n2[id_rvjaw]>Hapus Siswa</a> |
                           <a href=?module=quiz&act=editkoreksi&id=$t[id_tq]&id_siswa=$s[id_siswa]>Edit Koreksi</a></td></tr>";
                       }
+                       echo "<td>Nilai : $n2[persentase]</td>";
+                       echo "
+                          <td><a href=$aksi?module=quiz&act=editsiswayangtelahmengerjakan&id=$t[id]&id_siswa=$s[id_siswa]&id_tq=$_GET[id]&id_rvjaw=$n2[id_rvjaw]>Hapus Siswa</a>
+                          </td></tr>";
+                      
                       
             $no++;
         }
