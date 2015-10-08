@@ -23,15 +23,24 @@ switch($_GET[act]){
       echo "<h2>Manajemen Peserta</h2><hr>";
       echo "<br><br><div class='information msg'>Peserta tidak bisa di hapus, tapi bisa di non aktifkan.</div>";
       echo "<br><table id='table1' class='gtable sortable'><thead>
-          <tr><th>No</th><th>Nama</th><th>No Telp</th><th>Email</th><th>Jenis Kelamin</th>
+          <tr><th>No</th><th>Nama</th><th>No Telp</th><th>Email</th><th>Expire</th>
             <th>Blokir</th><th>Aksi</th></tr></thead>";
       $no = $posisi+1;
+      $now = strtotime(date("Y-m-d"));
     while ($r=mysql_fetch_array($tampil_siswa)){
+          $expdate = strtotime($r[expdate]);
+          if ($now < $expdate){
+            $exp="N";
+            $aksiexp = "";
+          } else {
+            $exp="Y";
+            $aksiexp = "<br> <a href='$aksi?module=siswa&act=renewsiswa&id=$r[id_siswa]'> ReNew</a>";
+          }
        echo "<tr><td>$no</td>
              <td>$r[nama_lengkap]</td>
              <td>$r[no_telp]</td>
              <td>$r[email]</td>
-             <td><p align='center'>$r[jenis_kelamin]</p></td>             
+             <td><p align='center'>$exp $aksiexp</p></td>             
              <td><p align='center'>$r[blokir]</p></td>
              <td><a href='?module=siswa&act=editsiswa&id=$r[id_siswa]' title='Edit'><img src='images/icons/edit.png' alt='Edit' /></a> |
                  <a href=?module=detailsiswa&act=detailsiswa&id=$r[id_siswa]>Detail</a></td></tr>";
@@ -45,7 +54,19 @@ switch($_GET[act]){
     echo "<br><div id=paging>$linkHalaman</div><br>";
     }
     break;
+/*
+case "renewsiswa":
+  
+    $expdate = date("Y-m-d",strtotime("+2months"));
+    mysql_query("UPDATE siswa SET expdate         = '$expdate'
+                                WHERE  id_siswa    = '$_SESSION[idsiswa]'");
 
+    //echo "<script>window.alert('Renew Success');
+    //        window.location=(href='../../media_admin.php?module=siswa')</script>";
+    header('location:../../media_admin.php?module=siswa');
+
+break;
+*/
 case "lihatmurid":
     if ($_SESSION[leveluser]=='admin'){
     $p      = new paging_lihatmurid;

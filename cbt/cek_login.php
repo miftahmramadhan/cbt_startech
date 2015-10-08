@@ -60,6 +60,9 @@ if ($ketemu > 0 ){
        mysql_query("UPDATE online SET ip='$ip',tanggal='$tanggal',online='Y' WHERE id_siswa = '$_SESSION[idsiswa]'");
     }
     header('location:media.php?module=home');
+  }else{
+    echo "<script>window.alert('LOGIN GAGAL! Account anda sudah Expired!');
+            window.location=(href='index.php')</script>";
   }
 }
 else{  

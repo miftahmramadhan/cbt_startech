@@ -472,6 +472,14 @@ elseif ($module=='siswa' AND $act=='update_kelas_siswa'){
 header('location:../../../media.php?module=kelas');
 }
 
+elseif ($module=='siswa' AND $act=='renewsiswa'){
+    $expdate = date("Y-m-d",strtotime("+2months"));
+    mysql_query("UPDATE siswa SET expdate         = '$expdate'
+                                WHERE  id_siswa    = '$_GET[id]'");
+
+header('location:../../media_admin.php?module=siswa');
+}
+
 elseif ($module=='siswa' AND $act=='update_profil_siswa'){
   $lokasi_file    = $_FILES['fupload']['tmp_name'];
   $tipe_file      = $_FILES['fupload']['type'];

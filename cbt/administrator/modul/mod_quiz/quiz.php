@@ -396,11 +396,11 @@ case "dnprocess":
                 if (!empty($cek_pilganda)){
                     echo"<br><b class='judul'>Nilai Anda</b><br><p class='garisbawah'></p>
                       <table>
-                      <tr><th>Deskripsi Tugas/Quiz </th><th>Nilai</th></tr>";
+                      <tr><th>Deskripsi Tugas/Quiz </th><th>Nilai</th><th></th></tr>";
                       $n_pilganda = mysql_fetch_array($pilganda);
                       
-                      echo "<tr><td>Soal Pilihan Ganda</td><td>$n_pilganda[persentase] 
-							<input type=button class='tombol' value='Lihat Jawaban' onclick=\"window.location.href='?module=quiz&act=reviewjawaban&idrvjaw=$n_pilganda[id_rvjaw]';\">
+                      echo "<tr><td>Soal Pilihan Ganda</td><td>$n_pilganda[persentase]</td>
+							                   <td><input type=button class='tombol' value='Lihat Jawaban' onclick=\"window.location.href='?module=quiz&act=reviewjawaban&idrvjaw=$n_pilganda[id_rvjaw]';\">
 							</td></tr>
                              </table>
                             <p class='garisbawah'></p><input type=button class='tombol' value='Kembali' onclick=self.history.back()>";
