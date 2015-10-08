@@ -24,9 +24,9 @@ else{
         $mapel = mysql_query("SELECT * FROM mata_pelajaran WHERE id_kelas = '$data_siswa[id_kelas]'");
         $cek_mapel = mysql_num_rows($mapel);
         if (!empty($cek_mapel)){
-            echo"<br><b class='judul'>Daftar Training</b><br><p class='garisbawah'></p>
+            echo"<br><b class='judul'>Daftar Nilai</b><br><p class='garisbawah'></p>
             <table>
-            <tr><th>No</th><th>Mata Pelajaran</th><th>Aksi</th></tr>";
+            <tr><th>No</th><th>Materi</th><th>Aksi</th></tr>";
             $no=1;
             while ($t=mysql_fetch_array($mapel)){
                 echo "<tr><td>$no</td>
@@ -41,6 +41,7 @@ else{
             echo "<script>window.alert('Belum ada mata pelajaran di kelas anda.');
                     window.location=(href='media.php?module=home')</script>";
         }
+        echo "<br><b class='judul'>Nilai Pretest</b><br><p class='garisbawah'></p>"; 
         echo "<table class='gtable sortable'><tr><td>";
     echo "<table class='gtable sortable'>
 			<thead>

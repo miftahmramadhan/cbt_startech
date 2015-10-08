@@ -23,8 +23,8 @@ switch($_GET[act]){
       echo "<h2>Manajemen Peserta</h2><hr>";
       echo "<br><br><div class='information msg'>Peserta tidak bisa di hapus, tapi bisa di non aktifkan.</div>";
       echo "<br><table id='table1' class='gtable sortable'><thead>
-          <tr><th>No</th><th>Nama</th><th>No Telp</th><th>Email</th><th>Expire</th>
-            <th>Blokir</th><th>Aksi</th></tr></thead>";
+          <tr><th>No</th><th>Nama</th>"/*<th>No Telp</th><th>Email</th>*/."<th><center>Expire</center></th>
+            <th><center>Blokir</center></th><th width='80'><center>Aksi</center></th></tr></thead>";
       $no = $posisi+1;
       $now = strtotime(date("Y-m-d"));
     while ($r=mysql_fetch_array($tampil_siswa)){
@@ -38,8 +38,8 @@ switch($_GET[act]){
           }
        echo "<tr><td>$no</td>
              <td>$r[nama_lengkap]</td>
-             <td>$r[no_telp]</td>
-             <td>$r[email]</td>
+             "/*<td>$r[no_telp]</td>
+             <td>$r[email]</td>*/."
              <td><p align='center'>$exp $aksiexp</p></td>             
              <td><p align='center'>$r[blokir]</p></td>
              <td><a href='?module=siswa&act=editsiswa&id=$r[id_siswa]' title='Edit'><img src='images/icons/edit.png' alt='Edit' /></a> |
@@ -205,8 +205,8 @@ case "lihatmurid":
           <fieldset>
           <legend>Edit Siswa</legend>
           <dl class='inline'>
-          <dt><label>Nama</label></dt>     <dd> : <input type=text name='nama' value='$r[nama_lengkap]' size=70></dd>
-          <dt><label>Username Login</label></dt>     <dd> : <input type=text name='username' value='$r[username_login]'></dd>
+          <dt><label>Nama</label></dt>     <dd> : <input type=text name='nama' value='$r[nama_lengkap]' size=50></dd>
+          <dt><label>Username Login</label></dt>     <dd> : <input type=text name='username' value='$r[username_login]' size=50></dd>
           <dt><label>Password Login</label></dt> <dd> : <input type=text name='password' size=30><small>Apabila password tidak diubah, dikosongkan saja</small></dd>
           <dt><label>Kelas</label></dt>        <dd> : <select name='id_kelas'>
                                            <option value=$kelas[id_kelas] selected>$kelas[nama]</option>";
@@ -214,7 +214,7 @@ case "lihatmurid":
                                            while($k=mysql_fetch_array($tampil)){
                                            echo "<option value=$k[id_kelas]>$k[nama]</option>";
                                            }echo "</select></dd>
-          <dt><label>Alamat</label></dt>       <dd> : <input type=text name='alamat' size=70 value='$r[alamat]'></dd>
+          <dt><label>Alamat</label></dt>       <dd> : <input type=text name='alamat' size=50 value='$r[alamat]'></dd>
           <dt><label>Tempat Lahir</label></dt> <dd> : <input type=text name='tempat_lahir' size=50 value='$r[tempat_lahir]'></dd>
           <dt><label>Tanggal Lahir</label></dt><dd> : ";
           $get_tgl=substr("$r[tgl_lahir]",8,2);
@@ -235,7 +235,7 @@ case "lihatmurid":
           echo "
           
           <dt><label>Email</label></dt>        <dd> : <input type=text name='email' size=30 value='$r[email]'></dd>
-          <dt><label>No Telp/HP</label></dt>   <dd> : <input type=text name='no_telp' size=20 value='$r[no_telp]'></dd>
+          <dt><label>No Telp/HP</label></dt>   <dd> : <input type=text name='no_telp' size=30 value='$r[no_telp]'></dd>
           <dt><label>Foto</label></dt>   <dd> : ";
             if ($r[foto]!=''){
               echo "<ul class='photos sortable'>

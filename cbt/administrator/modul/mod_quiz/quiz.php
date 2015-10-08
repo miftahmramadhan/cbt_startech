@@ -92,10 +92,10 @@ switch($_GET[act]){
       
       if ($_SESSION[leveluser]=='admin'){    
         echo "<h2>Manajemen Ujian</h2><hr>
-          <input type=button class='button blue' value='Tambah Topik' onclick=\"window.location.href='?module=quiz&act=tambahtopikquiz';\">";
+          <input type=button class='button blue' value='Buat Set Soal' onclick=\"window.location.href='?module=quiz&act=tambahtopikquiz';\">";
 
         echo "<br><br><table id='table1' class='gtable sortable'><thead>
-          <tr><th>no</th><th>judul</th><th>kelas</th><th>pelajaran</th><th>tgl buat</th><th>pembuat</th><th>waktu</th><th>Info</th><th>terbit</th><th>aksi</th></tr></thead>";
+          <tr><th>no</th><th>Judul</th>"/*<th>Kelas</th><th>Materi</th>*/."<th>Tgl Buat</th><th>Pembuat</th><th>Waktu</th><th>Info</th><th>Terbit</th><th width='100'>Aksi</th></tr></thead>";
         
         $tampil_topik = mysql_query("SELECT * FROM topik_quiz ORDER BY id_kelas");
         
@@ -105,7 +105,7 @@ switch($_GET[act]){
       $tgl_buat   = tgl_indo($r[tgl_buat]);
        echo "<tr><td>$no</td>
              <td>$r[judul]</td>";
-             $kelas = mysql_query("SELECT * FROM kelas WHERE id_kelas = '$r[id_kelas]'");
+             /*$kelas = mysql_query("SELECT * FROM kelas WHERE id_kelas = '$r[id_kelas]'");
              $cek_kelas = mysql_num_rows($kelas);
              if(!empty($cek_kelas)){
              while($k=mysql_fetch_array($kelas)){
@@ -114,7 +114,8 @@ switch($_GET[act]){
              }else{
                  echo"<td></td>";
              }
-             $pelajaran = mysql_query("SELECT * FROM mata_pelajaran WHERE id_matapelajaran = '$r[id_matapelajaran]'");
+             */
+             /*$pelajaran = mysql_query("SELECT * FROM mata_pelajaran WHERE id_matapelajaran = '$r[id_matapelajaran]'");
              $cek_pelajaran = mysql_num_rows($pelajaran);
              if(!empty($cek_pelajaran)){
              $p=mysql_fetch_array($pelajaran);
@@ -122,6 +123,7 @@ switch($_GET[act]){
              }else{
                  echo"<td></td>";
              }
+             */
              echo"<td>$tgl_buat</td>";
              $pelajaran2 = mysql_query("SELECT * FROM mata_pelajaran WHERE id_matapelajaran = '$r[id_matapelajaran]'");
              $p2=mysql_fetch_array($pelajaran2);
@@ -138,23 +140,23 @@ switch($_GET[act]){
              <td><p align='center'>$r[terbit]</p></td>
              <td><ul><li><a href='?module=quiz&act=edittopikquiz&id=$r[id_tq]' title='Edit'><img src='images/icons/edit.png' alt='Edit' /></a> | 
                  <a href=javascript:confirmdelete('$aksi?module=quiz&act=hapustopikquiz&id=$r[id_tq]') title='Hapus'><img src='images/icons/cross.png' alt='Delete' /></a></li>
-                 <li><a href=?module=buatquiz&act=buatquiz&id=$r[id_tq]>Buat Quiz</a></li>
-                 <li><a href=?module=daftarquiz&act=daftarquiz&id=$r[id_tq]>Daftar Quiz</a></li>
-                 <li><a href=?module=quiz&act=daftarsiswayangtelahmengerjakan&id=$r[id_tq]>Daftar Peserta & Koreksi</a></li></ul></td></tr>";
+                 <li><a href=?module=buatquiz&act=buatquiz&id=$r[id_tq]>Buat Soal</a></li>
+                 <li><a href=?module=daftarquiz&act=daftarquiz&id=$r[id_tq]>Daftar Soal</a></li>
+                 <li><a href=?module=quiz&act=daftarsiswayangtelahmengerjakan&id=$r[id_tq]>Daftar Peserta</a></li></ul></td></tr>";
       $no++;
     }
     echo "</table>";
     echo "<table class='gtable sortable'><tr><td>";
     echo "<table class='gtable sortable'>
 			<thead>
-				<tr><th>10 Knowledge</th><th> Aksi</th></tr>
+				<tr><th>10 Knowledge</th><th><center>Aksi</center></th></tr>
 			</thead>
 			";
 			  $pilih="SELECT * FROM knowledge ORDER BY id";
 			  $query=mysql_query($pilih);
 			  while($row=mysql_fetch_array($query)){
-			  	echo"<tr><td><a href=?module=quiz&act=daftarkop&kop=kn&id=$row[id_field]>".$row[knowledge]."</a></td>
-						<td><a href=?module=quiz&act=daftarsiswaudahkop&id=$row[id_field]>Daftar Peserta</a></td>
+			  	echo"<tr><td>".$row[knowledge]."</td>
+						<td align='center'><a href=?module=quiz&act=daftarkop&kop=kn&id=$row[id_field]>Lihat Soal</a> | <a href=?module=quiz&act=daftarsiswaudahkop&id=$row[id_field]>Daftar Peserta</a></td>
 			  	</tr>";
 			  }
 			  
@@ -165,14 +167,14 @@ switch($_GET[act]){
 	echo "</td><td>";
 	echo "<table class='gtable sortable'>
 			<thead>
-				<tr><th>5 Process</th><th> Aksi</th></tr>
+				<tr><th>5 Process</th><th><center>Aksi</center></th></tr>
 			</thead>
 			";
 			$pilih2="SELECT * FROM process ORDER BY id";
 		    $query2=mysql_query($pilih2);
 		    while($row2=mysql_fetch_array($query2)){				
-			echo"<tr><td><a href=?module=quiz&act=daftarkop&kop=pr&id=$row2[id_step]>".$row2[process]."</a></td>
-				<td><a href=?module=quiz&act=daftarsiswaudahkop&id=$row2[id_step]>Daftar Peserta</a></td>
+			echo"<tr><td>".$row2[process]."</td>
+				<td align='center'><a href=?module=quiz&act=daftarkop&kop=pr&id=$row2[id_step]>Lihat Soal</a> | <a href=?module=quiz&act=daftarsiswaudahkop&id=$row2[id_step]>Daftar Peserta</a></td>
 			</tr>";
 		   }
 	echo"
@@ -180,7 +182,7 @@ switch($_GET[act]){
 	</table>";
 	echo "</td></tr></table>";
     
-    }    
+    }/*    
     elseif ($_SESSION[leveluser]=='pengajar'){
     $tampil_topik = mysql_query("SELECT * FROM topik_quiz WHERE pembuat = '$_SESSION[idpengajar]'");
         echo "<h2>Daftar Topik Quiz</h2><hr>
@@ -258,14 +260,14 @@ switch($_GET[act]){
 	</table>";
 	echo "</td></tr></table>";
          
-    }
+    }*/
     elseif ($_SESSION[leveluser]=='siswa'){
         $siswa = mysql_query("SELECT * FROM siswa WHERE id_siswa = '$_SESSION[idsiswa]'");
         $data_siswa = mysql_fetch_array($siswa);
         $mapel = mysql_query("SELECT * FROM mata_pelajaran WHERE id_kelas = '$data_siswa[id_kelas]'");
         $cek_mapel = mysql_num_rows($mapel);        
         if (!empty($cek_mapel)){
-            echo"<br><b class='judul'>Training</b><br><p class='garisbawah'></p>
+            echo"<br><b class='judul'>Daftar Training</b><br><p class='garisbawah'></p>
             <table>
             <tr><th>No</th><th>Materi</th><th>Aksi</th></tr>";
             $no=1;
@@ -283,7 +285,7 @@ switch($_GET[act]){
             echo "<script>window.alert('Belum ada mata pelajaran di kelas anda.');
                     window.location=(href='media.php?module=home')</script>";
         }
-      
+    echo "<br><b class='judul'>Pretest</b><br><p class='garisbawah'></p>";  
     echo "<table class='gtable sortable'><tr><td>";
     echo "<table class='gtable sortable'>
 			<thead>
@@ -301,6 +303,7 @@ switch($_GET[act]){
 	
 	</table>";
 	echo "</td><td>";
+
 	echo "<table class='gtable sortable'>
 			<thead>
 				<tr><th>5 Process</th></tr>
@@ -1520,11 +1523,13 @@ case "tambahtopikquiz":
     if ($_SESSION[leveluser]=='admin'){
     echo "
     <form name='form_topik' method=POST action='$aksi?module=quiz&act=input_topikquiz'>
+    <input type=hidden name='id_kelas' value='A'>
+    <input type=hidden name='id_matapelajaran' value='PMP1'>
     <fieldset>
-    <legend>Tambah Topik</legend>
+    <legend>Buat Set Soal</legend>
     <dl class='inline'>
     <dt><label>Judul</label></dt>              <dd> <input type=text name='judul' size='50'></dd>
-    <dt><label>Kelas</label></dt>              <dd> <select name='id_kelas' onChange='showpel()'>
+    "/*<dt><label>Kelas</label></dt>              <dd> <select name='id_kelas' onChange='showpel()'>
                                           <option value=''>-pilih-</option>";
                                           $pilih="SELECT * FROM kelas ORDER BY nama";
                                           $query=mysql_query($pilih);
@@ -1533,6 +1538,8 @@ case "tambahtopikquiz":
                                           }
                                           echo"</select></dd>
     <dt><label>Pelajaran</label></dt>          <dd> <div id='pelajaran'></div></dd>
+    */."
+
     <dt><label>Waktu pengerjaan</label></dt>   <dd> <input type=text name='waktu' size='10'>
                                                     <small>Dalam Menit</small></dd>
     <dt><label>Info</label></dt>              <dd> <textarea name='info' id='wysiwyg' class='medium' rows='6'></textarea></td></tr>
@@ -1589,21 +1596,25 @@ case "edittopikquiz":
 
     echo "<form name='form_topik' method=POST action='$aksi?module=quiz&act=edit_topikquiz'>
     <input type=hidden name=id value='$t[id_tq]'>
+    <input type=hidden name='id_kelas' value='A'>
+    <input type=hidden name='id_matapelajaran' value='PMP1'>
     <fieldset>
     <legend>Edit Topik</legend>
     <dl class='inline'>
     <dt><label>Judul</label></dt>              <dd>: <input type=text name='judul' value='$t[judul]' size='50'></dd>
-    <dt><label>Kelas</label></dt>            <dd>: <select name='id_kelas' onChange='showpel()'>
+    "/*<dt><label>Kelas</label></dt>            <dd>: <select name='id_kelas' onChange='showpel()'>
                                           <option value='".$k[id_kelas]."' selected>".$k[nama]."</option>";
                                           $pilih="SELECT * FROM kelas ORDER BY nama";
+
                                           $query=mysql_query($pilih);
                                           while($row=mysql_fetch_array($query)){
                                           echo"<option value='".$row[id_kelas]."'>".$row[nama]."</option>";
                                           }
                                           echo"</select></dd>
     <dt><label>Pelajaran</label></dt>         <dd>: <select id='pelajaran' name='id_matapelajaran'>
-                                          <option value='".$p[id_matapelajaran]."' selected>".$p[nama]."</option>
+                                              <option value='".$p[id_matapelajaran]."' selected>".$p[nama]."</option>
                                           </select></dd>
+    */."                                      
     <dt><label>Waktu Pengerjaan</label></dt>   <dd>: <input type=text name='waktu' size='10' value='$waktu'>
                                                      <small>Dalam Menit</small></dd>
     <dt><label>Info Quiz</label></dt>               <dd> <textarea name='info' id='wysiwyg' class='medium' rows='6'>$t[info]</textarea></td></tr>";
@@ -2004,7 +2015,7 @@ case "buatquiz":
             <dl class='inline'>
             </dl>
           <p align=center'>
-          <input class='button white' type=button value='Buat Quiz Esay' onclick=\"window.location.href='?module=buatquizesay&act=buatquizesay&id=$t[id_tq]';\">
+          "/*<input class='button white' type=button value='Buat Quiz Esay' onclick=\"window.location.href='?module=buatquizesay&act=buatquizesay&id=$t[id_tq]';\">*/."
           <input class='button white' type=button value='Buat Quiz Pilihan Ganda' onclick=\"window.location.href='?module=buatquizpilganda&act=buatquizpilganda&id=$t[id_tq]';\">
           </p>
           <br><input class='button blue' type=button value=Kembali onclick=self.history.back()>
@@ -2212,7 +2223,8 @@ case "daftarquiz":
             <dl class='inline'>
             </dl>
           <p align=center'>
-          <input type=button class='button white' value='Daftar Quiz Esay' onclick=\"window.location.href='?module=daftarquizesay&act=daftarquizesay&id=$t[id_tq]';\"> 
+          "/*<input type=button class='button white' value='Daftar Quiz Esay' onclick=\"window.location.href='?module=daftarquizesay&act=daftarquizesay&id=$t[id_tq]';\"> 
+          */."
           <input type=button class='button white' value='Daftar Quiz Pilihan Ganda' onclick=\"window.location.href='?module=daftarquizpilganda&act=daftarquizpilganda&id=$t[id_tq]';\">
           </p>
           <br><input type=button class='button blue' value=Kembali onclick=self.history.back()>
