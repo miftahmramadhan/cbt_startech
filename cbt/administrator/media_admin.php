@@ -59,7 +59,13 @@ else{
 
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/switcher.js"></script>
-
+<script>
+function enable_import()
+  {
+  document.getElementById("upload").disabled=false
+  document.getElementById("upload").value='Import'
+  }
+</script>
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
 </head>
 <body onload="startclock()">

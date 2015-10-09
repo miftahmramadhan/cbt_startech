@@ -141,7 +141,7 @@ switch($_GET[act]){
              <td><ul><li><a href='?module=quiz&act=edittopikquiz&id=$r[id_tq]' title='Edit'><img src='images/icons/edit.png' alt='Edit' /></a> | 
                  <a href=javascript:confirmdelete('$aksi?module=quiz&act=hapustopikquiz&id=$r[id_tq]') title='Hapus'><img src='images/icons/cross.png' alt='Delete' /></a></li>
                  <li><a href=?module=buatquiz&act=buatquiz&id=$r[id_tq]>Buat Soal</a></li>
-                 <li><a href=?module=daftarquiz&act=daftarquiz&id=$r[id_tq]>Daftar Soal</a></li>
+                 
                  <li><a href=?module=quiz&act=daftarsiswayangtelahmengerjakan&id=$r[id_tq]>Daftar Peserta</a></li></ul></td></tr>";
       $no++;
     }
@@ -2010,16 +2010,27 @@ case "buatquiz":
     if ($_SESSION[leveluser]=='admin'){
         $topik=mysql_query("SELECT * FROM topik_quiz WHERE id_tq = '$_GET[id]'");
         $t=mysql_fetch_array($topik);
-        echo "<form><fieldset>
-            <legend>Jenis Kuis</legend>
+        echo "<form method=POST enctype='multipart/form-data' action='$aksi?module=quiz&act=uploadquiz&id=$t[id_tq]'><fieldset>
+            <legend>Buat Soal</legend>
             <dl class='inline'>
             </dl>
           <p align=center'>
           "/*<input class='button white' type=button value='Buat Quiz Esay' onclick=\"window.location.href='?module=buatquizesay&act=buatquizesay&id=$t[id_tq]';\">*/."
-          <input class='button white' type=button value='Buat Quiz Pilihan Ganda' onclick=\"window.location.href='?module=buatquizpilganda&act=buatquizpilganda&id=$t[id_tq]';\">
+          <input class='button white' type=button value='Buat atau Tambah Soal' onclick=\"window.location.href='?module=buatquizpilganda&act=buatquizpilganda&id=$t[id_tq]';\">
+          <input class='button white' type=button value='Lihat Daftar Soal' onclick=\"window.location.href='?module=daftarquiz&act=daftarquiz&id=$t[id_tq]';\">
           </p>
-          <br><input class='button blue' type=button value=Kembali onclick=self.history.back()>
+            "/*<form method=\"post\" enctype=\"multipart/form-data\" action=\"$aksi?module=quiz&act=uploadquiz&id=$t[id_tq]\">*/."
+            <br> <p>Atau upload soal dari file Excel
+            <br> Pilih File Excel yang akan di Upload (browse), kemudian Klik Upload
+              </p>
+            
+            <input class='button white' id=\"upload\" name=\"upload\" type=\"submit\" value=\"Upload Soal\" onclick=\"this.value='Uploading ..';\">
+            <input class='' name=\"file\" type=\"file\" onchange=\"enable_import()\">
+            "/*</form>*/."
+            <br>
+          <br><input class='button blue' type=button value=Kembali onclick=\"window.location.href='?module=quiz'\">
           </fieldset></form>";
+
     }
     else{
         $topik=mysql_query("SELECT * FROM topik_quiz WHERE id_tq = '$_GET[id]'");

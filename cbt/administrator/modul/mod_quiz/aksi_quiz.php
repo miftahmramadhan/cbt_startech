@@ -268,6 +268,94 @@ elseif($module=='quiz' AND $act=='hapusquizesay'){
      header('location:../../media_admin.php?module=daftarquizesay&act=daftarquizesay&id='.$_GET[id_topik]);
 }
 
+elseif($module=='quiz' AND $act=='uploadquiz'){
+    // menggunakan class phpExcelReader
+include "../../../configurasi/excel_reader2.php";
+
+// koneksi ke mysql
+// membaca file excel yang diupload
+//date_default_timezone_set('Asia/Jakarta');
+//$tanggal=date("hismdY");
+$tempFile =  $_FILES['file']['tmp_name'];
+    //$lokasi_file = $_FILES['file']['tmp_name'];
+    $nama_file   = $_FILES['file']['name'];
+    $targetPath = "../../../upload_soal/";
+    $targetFile = $targetPath . $nama_file;
+    $tipe_file = $_FILES['file']['type'];
+    //echo "$tempFile <br> $targetFile";
+
+  if(!empty($tempFile)){
+    //$targetPath = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+    //$targetPath = "../../../Upload";
+    //$targetFile =  str_replace('//','/',$targetPath) . $tanggal.$_FILES['file']['name']  ;
+                                      
+      //move_uploaded_file($tempFile,$targetFile);  
+      //$movedata = move_uploaded_file($tempFile,$targetFile); 
+
+      //if(move_uploaded_file($tempFile,$targetFile)){
+                                             
+        //chmod($targetFile, 0755);
+                                     
+        //Create new instance
+        $data = new Spreadsheet_Excel_Reader();
+        //$excel->setOutputEncoding('CP1251');
+        $data->read($tempFile);
+
+        // membaca jumlah baris dari data excel
+        $baris = $data->rowcount($sheet_index=0);
+
+        // nilai awal counter untuk jumlah data yang sukses dan yang gagal diimport
+        $sukses = 0;
+        $gagal = 0;
+
+        // import data excel mulai baris ke-2 (karena baris pertama adalah nama kolom)
+        for ($i=16; $i<=$baris; $i++){
+          // membaca data Pertanyaan (kolom ke-1)
+          //$tgl=date("d/m/Y", strtotime($data->val($i, 1)));
+          $pertanyaan = $data->val($i,2);
+          $pila = $data->val($i,3);
+          $pilb = $data->val($i,4);
+          $pilc = $data->val($i,5);
+          $pild = $data->val($i,6);
+          $kunci = $data->val($i,7);
+          $step = $data->val($i,8);
+          $field = $data->val($i,9);
+          /* membaca data id coa (kolom ke-2)
+          $id_coa = $data->val($i, 2);
+          // membaca data deskripsi transaksi (kolom ke-3)
+          $desc_trx = $data->val($i, 3);
+          // membaca data deskripsi transaksi (kolom ke-3)
+          $debit = (int)$data->val($i, 4);
+          // membaca data deskripsi transaksi (kolom ke-3)
+          $credit = (int)$data->val($i, 5);
+          */
+        
+          $query = ("INSERT INTO quiz_pilganda(id_tq,pertanyaan,pil_a,pil_b,pil_c,pil_d,kunci,id_field,id_step,tgl_buat)
+                         VALUES('$_GET[id]','$pertanyaan','$pila','$pilb','$pilc','$pild','$kunci','$field','$step','$tgl_sekarang')");
+          $hasil = mysql_query($query);
+
+          // jika proses insert data sukses, maka counter $sukses bertambah
+          // jika gagal, maka counter $gagal yang bertambah
+          if ($hasil) $sukses++;
+          else $gagal++;
+        }
+
+        // tampilan status sukses dan gagal
+          echo "<script>window.alert('Proses Upload Soal berhasil');
+                  window.location=(href='../../media_admin.php?module=buatquiz&act=buatquiz&id=$_GET[id]')</script>";
+        /*echo "<h3>Proses import data selesai.</h3>";
+        echo "<p>Jumlah data yang sukses diimport : ".$sukses."<br>";
+        echo "Jumlah data yang gagal diimport : ".$gagal."</p>"."<br>";
+        echo "Harap Tunggu, anda akan di redirect ke halaman awal";
+        header( 'Refresh: 3; url= index.php' ) ;*/
+    
+  }else{
+      echo "<script>window.alert('Tidak ada file yang di Upload');
+          window.location=(href='../../media_admin.php?module=buatquiz&act=buatquiz&id=$_GET[id]')</script>";
+  }
+}
+
+
 elseif($module=='quiz' AND $act=='edit_quizpilganda'){
     $lokasi_file = $_FILES['fupload']['tmp_name'];
     $nama_file   = $_FILES['fupload']['name'];
